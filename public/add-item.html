@@ -1,0 +1,98 @@
+<!-- public/add-item.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item - Eco-Friendly Borrow & Lend</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Common Header -->
+    <div id="header-container"></div>
+    
+    <section class="add-item-section">
+        <div class="container">
+            <h2>Add a New Item</h2>
+            <form id="addItemForm">
+                <!-- Category Selection -->
+                <label for="itemCategory">Category</label>
+                <select id="itemCategory" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="Car Sharing">Car Sharing</option>
+                    <option value="Moving Van">Moving Van</option>
+                    <option value="Tools">Tools</option>
+                    <option value="Camping">Camping</option>
+                    <option value="Books">Books</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Gardening">Gardening</option>
+                    <option value="Toys & Games">Toys & Games</option>
+                    <option value="Others">Others</option>
+                </select>
+                <hr> <!-- Horizontal line after category -->
+    
+                <!-- Item Name -->
+                <label for="itemName">Item Name</label>
+                <input type="text" id="itemName" placeholder="Item Name" required>
+                <hr> <!-- Horizontal line after item name -->
+    
+                <!-- Details (textarea) -->
+                <label for="itemDescription">Details</label>
+                <textarea id="itemDescription" placeholder="Detailed Description" rows="4" required></textarea>
+                <hr> <!-- Horizontal line after details -->
+    
+                <!-- Image Upload -->
+                <label for="itemImage">Images</label>
+                <input type="file" id="itemImage" accept="image/*" multiple>
+                <hr> <!-- Horizontal line after image -->
+    
+                <!-- Hiring Cost Selection -->
+                <label for="itemHiringCostRange">Hiring Cost Range</label>
+                <select id="itemHiringCostRange" required>
+                    <option value="0-10">$0 - $10</option>
+                    <option value="10-20">$10 - $20</option>
+                    <option value="20-30">$20 - $30</option>
+                    <option value="30-40">$30 - $40</option>
+                    <option value="40-50">$40 - $50</option>
+                    <option value="50-60">$50 - $60</option>
+                    <option value="60-70">$60 - $70</option>
+                    <option value="70-80">$70 - $80</option>
+                    <option value="80-90">$80 - $90</option>
+                    <option value="90-100">$90 - $100</option>
+                </select>
+    
+                <!-- Specific Cost -->
+                <label for="itemSpecificCost">Specify Cost within Range</label>
+                <input type="number" id="itemSpecificCost" min="0" max="9" required>
+                <hr> <!-- Horizontal line after hiring cost -->
+    
+                <!-- Submit Button -->
+                <button type="submit">Add Item</button>
+            </form>
+            <div id="addItemMessage"></div>
+        </div>
+    </section>
+    
+    
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2024 Eco-Friendly Borrow & Lend. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Load Common Header -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                    updateAuthButtons();
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+        
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>

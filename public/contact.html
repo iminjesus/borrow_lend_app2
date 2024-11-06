@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Eco-Friendly Borrow & Lend</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Common Header -->
+    <div id="header-container"></div>
+    
+    <div class="container">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or need assistance, please feel free to reach out to us.</p>
+        <p>Email: support@ecoborrowlend.com</p>
+        <p>Phone: +1 234 567 890</p>
+    </div>
+    
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2024 Eco-Friendly Borrow & Lend. All rights reserved.</p>
+        </div>
+    </footer>
+     <!-- Footer and scripts -->
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+    </script>
+</body>
+</html>

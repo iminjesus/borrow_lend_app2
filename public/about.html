@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Eco-Friendly Borrow & Lend</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Common Header -->
+    <div id="header-container"></div>
+    
+    <div class="container">
+        <h2>About Us</h2>
+        <p>Welcome to Eco-Friendly Borrow & Lend! Our mission is to promote sustainability by encouraging people to borrow and lend goods within their community.</p>
+        <p>We believe in reducing waste and supporting a circular economy. Join us in making the world a greener place!</p>
+    </div>
+    
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2024 Eco-Friendly Borrow & Lend. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Footer and scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+    </script>
+</body>
+</html>

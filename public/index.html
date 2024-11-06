@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Friendly Borrow & Lend</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js" defer></script>
+    
+</head>
+<body>
+    <!-- Common Header -->
+    <div id="header-container"></div>
+    
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Reduce, Reuse, Recycle</h2>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search for books, electronics, toys, and more...">
+                    <button onclick="fetchItems(document.getElementById('searchInput').value)">Search</button>
+                </div>
+                <div class="categories">
+                    <button class="category-btn" data-category="All">All</button>
+                    <button class="category-btn" data-category="Car Sharing">Car Sharing</button>
+                    <button class="category-btn" data-category="Moving Van">Moving Van</button>
+                    <button class="category-btn" data-category="Tools">Tools</button>
+                    <button class="category-btn" data-category="Camping">Camping</button>
+                    <button class="category-btn" data-category="Books">Books</button>
+                    <button class="category-btn" data-category="Clothing">Clothing</button>
+                    <button class="category-btn" data-category="Gardening<">Gardening</button>
+                    <button class="category-btn" data-category="Toys & Games">Toys & Games</button>
+                    <button class="category-btn" data-category="Others">Others</button>
+                    
+                    <!--<button class="category-btn" onclick="searchCategory('Others')">Others</button>-->
+                    <!-- Special Event Button with Subcategories -->
+                    <div class="event-container">
+                        <button class="event-btn">Events</button>
+                        <div class="event-dropdown">
+                            <a href="#" onclick="searchCategory('Performances/Busking')">Performances/Busking</a>
+                            <a href="#" onclick="searchCategory('Exhibition')">Exhibition</a>
+                        </div>
+                    </div>
+                </div>                
+                <!-- Add What You Want to Borrow Button -->
+                <div class="add-item-link">
+                    <a href="add-item.html" class="add-item-btn">Add What You Want to Lend</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map View and List View buttons -->
+    <div class="view-toggle">
+        <button id="mapViewButton">Map View</button>
+        <button id="listViewButton">List View</button>
+    </div>
+    <!-- Map Section -->
+    <section class="map-section">
+        <div id="map" style="height: 700px; width: 100%; border-radius: 8px;"></div>
+    </section>
+
+    <!-- List View Section (Initially Hidden) -->
+    <section class="list-section">
+        <ul id="itemsList" style="display: none;"></ul>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2024 Eco-Friendly Borrow & Lend. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="app.js" defer></script>
+    <script>
+        // Load the common header
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();  // Initialize the map after the DOM is loaded
+        });
+            
+
+    </script>
+        <!-- Load Leaflet CSS and JS before app.js -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        
+        
+        
+    
+</body>
+</html>

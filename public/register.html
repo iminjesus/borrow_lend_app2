@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Eco-Friendly Borrow & Lend</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+    <!-- Common Header -->
+    <div id="header-container"></div>
+
+    <!-- Registration Form -->
+    <section class="register-section">
+        <div class="register-container">
+            <h2>Join Us</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" placeholder="Enter your first name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" placeholder="Enter your last name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" placeholder="Enter your address" required>
+                </div>
+                <div class="form-group">
+                    <label for="cardNumber">Card Number:</label>
+                    <input type="text" id="cardNumber" placeholder="Enter your card number" required>
+                </div>
+                <div class="form-group">
+                    <label for="expiry">Expiry Date:</label>
+                    <input type="text" id="expiry" placeholder="MM/YY" required>
+                </div>
+                <div class="form-group">
+                    <label for="cardHolder">Card Holder Name:</label>
+                    <input type="text" id="cardHolder" placeholder="Enter cardholder's name" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Join Now</button>
+                </div>
+                <div id="registrationMessage"></div>
+            </form>            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2024 Eco-Friendly Borrow & Lend. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Google Maps API for address autocomplete -->
+    <script>
+        function initAutocomplete() {
+            const input = document.getElementById('address');
+            if (!input) {
+                console.error("Address input field not found.");
+                return;
+            }
+
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.setFields(['address_component', 'geometry']);
+
+            autocomplete.addListener('place_changed', function () {
+                const place = autocomplete.getPlace();
+                if (place.geometry) {
+                    const lat = place.geometry.location.lat();
+                    const lng = place.geometry.location.lng();
+                    console.log(`Selected location: ${lat}, ${lng}`);
+                } else {
+                    console.error('No geometry found for the selected place');
+                }
+            });
+        }
+
+       // Load the common header
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+            initAutocomplete();    
+            // Now attach the form submit event listener after ensuring the DOM is loaded
+            const registrationForm = document.getElementById('registrationForm');
+            
+            if (registrationForm) {
+                registrationForm.addEventListener('submit', async function (event) {
+                    event.preventDefault();
+                    
+                    // Collect form data
+                    const formData = {
+                        first_name: document.getElementById('first_name').value,
+                        last_name: document.getElementById('last_name').value,
+                        email: document.getElementById('email').value,
+                        password: document.getElementById('password').value,
+                        address: document.getElementById('address').value,
+                        cardNumber: document.getElementById('cardNumber').value,
+                        expiry: document.getElementById('expiry').value,
+                        cardHolder: document.getElementById('cardHolder').value
+                    };
+
+                    try {
+                        const response = await fetch('/register', {
+                            method: 'POST',
+                            body: JSON.stringify(formData),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                        
+                        const result = await response.json();
+                        document.getElementById('registrationMessage').innerText = result.message;
+                    } catch (error) {
+                        document.getElementById('registrationMessage').innerText = 'Error registering customer.';
+                        console.error('Error:', error);
+                    }
+                });
+            } else {
+                console.error('Registration form not found');
+            }
+        });
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoCHiqj2PjMpMzMic7mFg0ZU_KhomPdVk&libraries=places&callback=initAutocomplete" async defer></script>
+</body>
+</html>
